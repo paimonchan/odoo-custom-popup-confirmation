@@ -27,6 +27,6 @@ class CustomPopupConfirmation(models.TransientModel):
             name = _(self.title),
             res_model = self._name,
             type = 'ir.actions.act_window',
-            context = dict(self.env.context),
+            context = context,
         )
         return action
