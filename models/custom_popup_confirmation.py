@@ -2,19 +2,22 @@
 
 from odoo import models, fields, _
 
+# TODO: add example how to used this custom popup
 class CustomPopupConfirmation(models.TransientModel):
     _name = 'paimon.custom.popup.confirmation'
 
-    model = fields.Char()
-    title = fields.Char()
     message = fields.Char()
     callback = fields.Char()
+    source_model = fields.Char()
 
-    def show(self, title, message, callback):
+    def show(self, records, message, callback_name):
+        context = dict(self.env.context)
+        context.update(record_ids=records.ids)
+
         popup = self.create(dict(
-            title=title,
             message=message,
-            callback=callback)
+            callback=callback_name,
+            source_model=records._model,)
         )
 
         action =  dict(
