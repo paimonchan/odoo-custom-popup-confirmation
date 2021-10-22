@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, _
+import logging
+
+_logger = logging.getLogger(__name__)
 
 # TODO: add example how to used this custom popup
 class CustomPopupConfirmation(models.TransientModel):
