@@ -30,3 +30,23 @@ class CustomPopupConfirmation(models.TransientModel):
             context = context,
         )
         return action
+
+    def confirm(self):
+        context = self.env.context
+        record_ids = context.get('record_ids') or []
+        model = self.env['ir.model'].search([('model', '=', self.source_model)])
+        # check if model is exist
+        if not model:
+            message = 'not found model {}'.format(self.source_model)
+            _logger.error(message)
+            return
+
+        if self.callback:
+            records = self.env[self.model].browse(record_ids)
+            callback = getattr(records, self.callback, None)
+            # check if function is exist inside model
+            if not callback:
+                message = 'model {} dont have function {}'.format(self.source_model, self.callback)
+                _logger.erro(message)
+                return
+            callback(record_ids)
