@@ -14,7 +14,7 @@ def callback(self):
 
 def open_confirmation(self):
     """
-    Example show confirmation popup before actual call function action_done.
+    Example show confirmation popup before actual call function callback.
     """
     popup = self.env['paimon.popup.confirmation']
     message = 'Are you sure to this action?'
