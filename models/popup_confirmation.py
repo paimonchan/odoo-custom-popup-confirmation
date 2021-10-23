@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 # TODO: add example how to used this custom popup
 class CustomPopupConfirmation(models.TransientModel):
-    _name = 'paimon.custom.popup.confirmation'
+    _name = 'paimon.popup.confirmation'
     _description = "Custom Popup Confirmation"
 
     message = fields.Char()
@@ -52,4 +52,4 @@ class CustomPopupConfirmation(models.TransientModel):
                 message = 'model {} dont have function {}'.format(self.source_model, self.callback)
                 _logger.warning(message)
                 return
-            callback()
+            callback()            return callback()

@@ -2,10 +2,10 @@
 <odoo>
     <record id="custom_popup_confirmation" model="ir.ui.view">
         <field name="name">Custom Popoup Confirmation</field>
-        <field name="model">paimon.custom.popup.confirmation</field>
+        <field name="model">paimon.popup.confirmation</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Confirmation" version="7.0">
+            <form string="Confirmation" version="15.0">
                 <separator string="Confirmation" colspan="6"/>
                 <field name="message" colspan="4" nolabel="1" readonly="1"  widget="html"/>                                                            
                 <newline/>
