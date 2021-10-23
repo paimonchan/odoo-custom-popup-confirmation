@@ -8,7 +8,7 @@
     "website": "https://github.com/paimonchan/odoo-stock-picking-cancelation",
     "depends": [],
     "data": [
-        'security/ir.mode.access.csv',
+        'security/ir.model.access.csv',
         'views/custom_popup_confirmation.xml'
     ],
     "installable": True,
