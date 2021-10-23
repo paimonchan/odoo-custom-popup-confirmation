@@ -52,4 +52,4 @@ class CustomPopupConfirmation(models.TransientModel):
                 message = 'model {} dont have function {}'.format(self.source_model, self.callback)
                 _logger.warning(message)
                 return
-            callback()            return callback()
+            return callback()
