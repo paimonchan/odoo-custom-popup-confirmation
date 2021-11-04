@@ -19,18 +19,19 @@ class CustomPopupConfirmation(models.TransientModel):
         context.update(record_ids=records.ids)
 
         popup = self.create(dict(
-            message=message,
-            callback=callback_name,
-            source_model=records._name,)
+            message     = message,
+            callback    = callback_name,
+            source_model= records._name,)
         )
 
         action =  dict(
-            target = 'new',
-            res_id=popup.id,
-            view_mode = 'form',
-            res_model = self._name,
-            type = 'ir.actions.act_window',
-            context = context,
+            name        = 'Confirmation',
+            target      = 'new',
+            res_id      = popup.id,
+            view_mode   = 'form',
+            res_model   = self._name,
+            type        = 'ir.actions.act_window',
+            context     = context,
         )
         return action
 
