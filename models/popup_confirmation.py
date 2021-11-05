@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, _
+from odoo.exceptions import UserError
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -19,18 +20,19 @@ class CustomPopupConfirmation(models.TransientModel):
         context.update(record_ids=records.ids)
 
         popup = self.create(dict(
-            message=message,
-            callback=callback_name,
-            source_model=records._name,)
+            message     = message,
+            callback    = callback_name,
+            source_model= records._name,)
         )
 
         action =  dict(
-            target = 'new',
-            res_id=popup.id,
-            view_mode = 'form',
-            res_model = self._name,
-            type = 'ir.actions.act_window',
-            context = context,
+            name        = 'Confirmation',
+            target      = 'new',
+            res_id      = popup.id,
+            view_mode   = 'form',
+            res_model   = self._name,
+            type        = 'ir.actions.act_window',
+            context     = context,
         )
         return action
 
@@ -42,7 +44,7 @@ class CustomPopupConfirmation(models.TransientModel):
         if not model:
             message = 'not found model {}'.format(self.source_model)
             _logger.warning(message)
-            return
+            raise UserError(message)
 
         if self.callback:
             records = self.env[self.source_model].browse(record_ids)
@@ -51,5 +53,5 @@ class CustomPopupConfirmation(models.TransientModel):
             if not callback:
                 message = 'model {} dont have function {}'.format(self.source_model, self.callback)
                 _logger.warning(message)
-                return
+                raise UserError(message)
             return callback()
